@@ -13,6 +13,19 @@ const ListItem = ({ index }) => {
   const triler =
     "https://vod-progressive.akamaized.net/exp=1662461291~acl=%2Fvimeo-transcode-storage-prod-us-west1-h264-540p%2F01%2F97%2F4%2F100486427%2F269725381.mp4~hmac=35fc99e225d52d0643e9491f09dfb652aa58b1bf2152380222de92233069efc9/vimeo-transcode-storage-prod-us-west1-h264-540p/01/97/4/100486427/269725381.mp4";
 
+   const handlePlayMove = () => {
+    if(isHovered) {
+      setTimeout(() => {
+        setMoviPlayed(true)
+      },500)
+    }else if(!isHovered){
+      setMoviPlayed(false)
+    }
+   }
+
+   {isHovered &&(
+    handlePlayMove()
+   )}
     
   return (
     <div
@@ -27,7 +40,9 @@ const ListItem = ({ index }) => {
       />
       {isHovered && ( 
         <>
+        {moviPlayed && (
           <video src={triler} autoPlay={true} loop />
+        )}
           <div className="itemInfo">
             <div className="icons">
               <PlayArrow className="icon"/>
