@@ -1,16 +1,34 @@
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./featured.scss";
+const axios = require("axios").default
 
 function Featured({type}) {
+const [content, setContent] = useState({})
 
+useEffect(() => {
+  const getRandomContent =  async()=>{
+    try {
+      const res = await axios.get(`http://localhost:5000/api/movies/randam?type=${type}`,{
+        headers: {
+          Authorization:"Sunna "+ "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3ZWZjOTRiNjg5NTQ4ZDVkMDMyNWEiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NjI2MDkxNzl9.Bd1APD-phRJb9oyinEiDQprqQctKjBFon_v45plbR-M",
+        },
+      });
+      setContent(res.data[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  getRandomContent()
+}, []);;
 
+console.log(content)
 
   return (
     <div className="featured">
         {type &&(
             <div className="category">
-                <span>{type === 'movie'? 'movies' : "series"}</span>
+                <span>{type === 'movies'? 'movies' : "series"}</span>
                 <select name="ganre" id="ganre">
                     <option >Ganre</option>
                     <option value="advanture">Advanture</option>
@@ -30,17 +48,12 @@ function Featured({type}) {
             </div>
         )}
       <img
-        src="https://sportshub.cbsistatic.com/i/2021/09/16/15cf5b2d-38cc-4a83-a2ff-d24bffd13dfb/finch-chappie.jpg"
+        src={content.img}
         alt=""
       />
       <div className="info">
-        <img src="https://occ-0-1001-768.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABdNRNPQ7K5qwXuXBIqrludM9zzie5e6TQjzfkm5-9fxSYaMow7HfLzPXR3qrngqXNNt7YSsv0vhH8ugVuCQwLkmsbnmEstDaBAzzk5Hrv2Gz.png?r=506" alt="" />
-        <span className="desc">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat optio
-          delectus sit maiores cumque tempore esse deleniti debitis deserunt
-          ipsum magnam doloribus omnis officiis itaque eum, blanditiis unde
-          incidunt necessitatibus!
-        </span>
+        <img src={content.imgTitle} alt="" />
+        <span className="desc">{content.descr}</span>
         <div className="buttons">
           <button className="play">
             <PlayArrow />

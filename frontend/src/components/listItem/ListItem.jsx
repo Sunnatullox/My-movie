@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./listitem.scss";
 import {
   Add,
@@ -6,65 +6,83 @@ import {
   ThumbDownAltOutlined,
   ThumbUpAltOutlined,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+const axios = require("axios").default;
 
-const ListItem = ({ index }) => {
+const ListItem = ({ index, item }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [moviPlayed, setMoviPlayed] = useState(false);
-  const triler =
-    "https://vod-progressive.akamaized.net/exp=1662461291~acl=%2Fvimeo-transcode-storage-prod-us-west1-h264-540p%2F01%2F97%2F4%2F100486427%2F269725381.mp4~hmac=35fc99e225d52d0643e9491f09dfb652aa58b1bf2152380222de92233069efc9/vimeo-transcode-storage-prod-us-west1-h264-540p/01/97/4/100486427/269725381.mp4";
+  const [movie, setMovie] = useState({});
 
-   const handlePlayMove = () => {
-    if(isHovered) {
+  useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/movies/find/" + item,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization:
+                "Sunna " +
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3ZWZjOTRiNjg5NTQ4ZDVkMDMyNWEiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NjI2MDkxNzl9.Bd1APD-phRJb9oyinEiDQprqQctKjBFon_v45plbR-M",
+            },
+          }
+        );
+
+        setMovie(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getMovie()
+  }, [item]);
+
+  const handlePlayMove = () => {
+    if (isHovered) {
       setTimeout(() => {
-        setMoviPlayed(true)
-      },500)
-    }else if(!isHovered){
-      setMoviPlayed(false)
+        setMoviPlayed(true);
+      }, 500);
+    } else if (!isHovered) {
+      setMoviPlayed(false);
     }
-   }
+  };
 
-   {isHovered &&(
-    handlePlayMove()
-   )}
-    
+  {
+    isHovered && handlePlayMove();
+  }
+
   return (
+    <Link to={{pathname:"/watch", movie:movie}}>
     <div
       className="listItem"
       style={{ left: isHovered && index * 235 - 45 + index * 2.5 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img
-        src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/05/tom-cruise-poster-for-top-gun-maverick-cropped.jpg"
-        alt=""
-      />
-      {isHovered && ( 
+      <img src={movie.img} alt="" />
+      {isHovered && (
         <>
-        {moviPlayed && (
-          <video src={triler} autoPlay={true} loop />
-        )}
+          {moviPlayed && <video playsinline src={movie.trailer} autoPlay={true} loop />}
           <div className="itemInfo">
             <div className="icons">
-              <PlayArrow className="icon"/>
-              <Add className="icon"/>
-              <ThumbUpAltOutlined className="icon"/>
-              <ThumbDownAltOutlined className="icon"/>
+              <PlayArrow className="icon" />
+              <Add className="icon" />
+              <ThumbUpAltOutlined className="icon" />
+              <ThumbDownAltOutlined className="icon" />
             </div>
             <div className="itemInfoTop">
-              <span>1 hour 14 min</span>
-              <span className="limit">+16</span>
-              <span>2010</span>
+              <span>{movie.duration}</span>
+              <span className="limit">+{movie.limit}</span>
+              <span>{movie.year}</span>
             </div>
-            <div className="desc">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatibus dolores atque dolore corrupti cupiditate quasi
-              dolorem magni veritatis?
-            </div>
-            <div className="genre">Action</div>
+            <div className="desc">{movie.descr}</div>
+            <div className="genre">{movie.genre}</div>
           </div>
         </>
       )}
     </div>
+    </Link>
   );
 };
 
