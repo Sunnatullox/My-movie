@@ -14,6 +14,7 @@ const ListItem = ({ index, item }) => {
   const [moviPlayed, setMoviPlayed] = useState(false);
   const [movie, setMovie] = useState({});
 
+
   useEffect(() => {
     const getMovie = async () => {
       try {

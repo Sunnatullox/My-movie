@@ -7,25 +7,28 @@ const verifyLogin = require("../middleware/verifyLogin");
 // User Update
 router.put("/:id", verifyLogin, async (req, res) => {
   const { id } = req.params;
-  const { _id, isAdmin } = req.user;
-  const password = req.body?.password;
-
-  if (_id.toString() === id || isAdmin) {
+  const { _id } = req.user;
+  const picture = req.body?.profilePic;
+  console.log(req.body)
+  if (_id.toString() === id ) {
     try {
-      const hashPass = await bcryptjs.hashSync(password, 10);
+      const hashPass = await bcryptjs.hashSync(req.body.password, 10);
 
-      const updateUser = await User.findByIdAndUpdate(
+       await User.findByIdAndUpdate(
         { _id: id },
         {
           $set: {
             name: req.body?.name,
             email: req.body?.email,
             password: hashPass,
+            profilePic: picture
           },
         },
         { new: true }
       );
-      res.status(200).json(updateUser);
+       const updateUser = await User.findById({_id:id})
+       const {password, ...resultUser}= updateUser._doc
+      return res.status(200).json(resultUser);
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +78,7 @@ router.get("/", verifyLogin, async (req, res) => {
   if (req.user.isAdmin) {
     try {
       const users = query
-        ? await User.find().sort({ _id: -1 }).limit(10)
+        ? await User.find().sort({ _id: -1 }).limit(5)
         : await User.find();
       res.status(200).json(users);
     } catch (error) {
@@ -91,22 +94,7 @@ router.get("/", verifyLogin, async (req, res) => {
 router.get("/stats", async (req, res) => {
   const today = new Date();
   const latYear = today.setFullYear(today.setFullYear() - 1);
-
-  const monthsArray = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
+  
   try {
     const data = await User.aggregate([
       {

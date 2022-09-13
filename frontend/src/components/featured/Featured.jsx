@@ -1,9 +1,10 @@
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./featured.scss";
 const axios = require("axios").default
 
-function Featured({type}) {
+function Featured({type, setGenre}) {
 const [content, setContent] = useState({})
 
 useEffect(() => {
@@ -22,47 +23,53 @@ useEffect(() => {
   getRandomContent()
 }, []);;
 
-console.log(content)
-
   return (
     <div className="featured">
         {type &&(
             <div className="category">
                 <span>{type === 'movies'? 'movies' : "series"}</span>
-                <select name="ganre" id="ganre">
-                    <option >Ganre</option>
+                <select name="ganre" id="ganre" onChange={e => setGenre(e.target.value)}>
+                    <option value=" ">Ganre</option>
                     <option value="advanture">Advanture</option>
+                    <option value="action">Action</option>
+                    <option value="animation">Animation</option>
+                    <option value="drama">Drama</option>
+                    <option value="documentary">Documentary</option>
                     <option value="comedy">Comedy</option>
-                    <option value="advanture">Crime</option>
-                    <option value="advanture">Fantasy</option>
-                    <option value="advanture">Historical</option>
-                    <option value="advanture">Horror</option>
-                    <option value="advanture">Romance</option>
-                    <option value="advanture">Sci-fi</option>
-                    <option value="advanture">Thriller</option>
-                    <option value="advanture">Western</option>
-                    <option value="advanture">Animation</option>
-                    <option value="advanture">Drama</option>
-                    <option value="advanture">Documentary</option>
+                    <option value="crime">Crime</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="historical">Historical</option>
+                    <option value="horror">Horror</option>
+                    <option value="romance">Romance</option>
+                    <option value="religious">Religious</option>
+                    <option value="sci-fi">Sci-fi</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="western">Western</option>
                 </select>
             </div>
         )}
+        
       <img
         src={content.img}
         alt=""
+        className="pageImg"
       />
       <div className="info">
-        <img src={content.imgTitle} alt="" />
-        <span className="desc">{content.descr}</span>
+        {content.imgTitle && (
+          <img src={content?.imgTitle} alt="" />
+        )}
+        <span className="desc">{content.descr?.slice(0, 200)}. . .</span>
         <div className="buttons">
-          <button className="play">
+            <Link   className="play" to={{pathname:"/watch", movie:content}}>
             <PlayArrow />
-            <span>Play</span>
-          </button>
-          <button className="more">
+              <span>
+                Play
+                </span> 
+               </Link>
+          <Link to={{pathname:"/movieInfo", movieInfo:content}} className="more">
             <InfoOutlined />
             <span>Info</span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

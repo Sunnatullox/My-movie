@@ -1,76 +1,108 @@
-.navbar {
-    width: 100%;
-    color: white;
-    font-size: 14px;
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3)50%);
+@import "../../App.scss";
+.navbars {
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
 
+  &.scrolled {
+    background-color: var(--main-color);
+  }
 
-    &.scrolled{
-        background-color: var(--main-color);
-    }
+  .containers {
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
 
-    .container {
-        padding: 0 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 70px;
+    .left {
+      display: flex;
+      align-items: center;
 
-        .left {
-            display: flex;
-            align-items: center;
+      img {
+        height: 45px;
+        margin-right: 40px;
 
-            img {
-                height: 45px;
-                margin-right: 40px;
-            }
+        @include mobile {
+          display: none;
+        }
+      }
 
-            span {
-                margin-right: 20px;
-                cursor: pointer;
-            }
+      span{
+
+        margin-right: 20px;
+        cursor: pointer;
+
+        @include tablet {
+          display: none;
         }
 
-        .right {
-            display: flex;
-            align-items: center;
-
-            .icon {
-                margin: 0 15px;
-                cursor: pointer;
-            }
-
-            img {
-                width: 35px;
-                height: 35px;
-                border-radius: 5px;
-                object-fit: cover;
-                cursor: pointer;
-            }
-
-            .profile {
-                .options {
-                    display: none;
-                    background-color: var(--main-color);
-                    border-radius: 5px;
-                }
-
-                span {
-                    padding: 10px;
-                    cursor: pointer;
-                }
-
-                &:hover {
-                    .options {
-                        display: flex;
-                        flex-direction: column;
-                        position: absolute;
-                    }
-                }
-            }
+        &.navbarMainLinks {
+          @include tablet {
+            display: block;
+          }
         }
+      }
     }
+
+    .right {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        margin: 0 15px;
+        cursor: pointer;
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      .profile {
+        .options {
+          display: none;
+          background-color: var(--main-color);
+          border-radius: 5px;
+        }
+
+        span, a {
+          text-decoration: none;
+          color: white;
+          padding: 10px;
+          cursor: pointer;
+        }
+
+        &:hover {
+          .options {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+          }
+        }
+      }
+    }
+    .loginbutton {
+      background-color: red;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      padding: 5px 15px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      @include mobile {
+        padding: 1px 8px;
+        font-size: 12px;
+      }
+    }
+  }
 }

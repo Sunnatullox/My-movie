@@ -6,10 +6,7 @@ import "./whatch.scss";
 const Whatch = () => {
 
   const location = useLocation()
-  console.log(location)
   const video = location.movie.video
-
-
   return (
     <div className="whatch">
       <Link to="/" className="link">

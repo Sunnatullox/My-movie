@@ -2,10 +2,13 @@ import List from "../../components/list/List";
 import React, { useEffect, useState } from "react";
 import Featured from "../../components/featured/Featured";
 import Navbar from "../../components/navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../authContext/AuthContext";
 import "./home.scss";
 const axios = require('axios').default;
 
 function Home({ types }) {
+  const { user } = useContext(AuthContext);
   const [lists, setLists] = useState([]);
   const [genre, setGenre] = useState(null);
 
@@ -32,10 +35,10 @@ function Home({ types }) {
   }, [types, genre]);
   return (
     <div className="home">
-      <Navbar />
-      <Featured type={types} />
-      {lists.map(list =>( 
-        <List list={list}/>
+      <Navbar user={user}/>
+      <Featured type={types} setGenre={setGenre}/>
+      {lists.map((list, i) =>( 
+        <List key={i}  list={list}/>
       ))}
     </div>
   );

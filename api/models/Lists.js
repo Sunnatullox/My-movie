@@ -7,7 +7,7 @@ const ListsSchema = new mongoose.Schema({
       unique:true
     },
     type:{type:String},
-    genre: {type:Number},
+    genre: {type:String},
     content:{type:Array}
   },
   {

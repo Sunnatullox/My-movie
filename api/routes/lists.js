@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { query } = require("express");
 const mongoose = require("mongoose");
 const List = mongoose.model("List");
 const verifyLogin = require("../middleware/verifyLogin");

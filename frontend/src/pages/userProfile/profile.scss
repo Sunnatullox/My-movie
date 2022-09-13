@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans");
+@import url("https://fonts.googleapis.com/css?family=Oswald");
+@import "../../App.scss";
+$blue: #457b8c;
+$gray: #f0f0f0;
+$red: #ce4034;
+$green: #08b8b8;
+$primary-font-color: #798796;
+$secondary-font-color: #595556;
+
+$primary-font: "PT Sans";
+$secondary-font: "Oswald";
+
+h1 {
+  font-family: $secondary-font;
+  text-transform: uppercase;
+  color: $primary-font-color;
+  font-size: 2.5rem;
+}
+h5 {
+  font-family: $secondary-font;
+  text-transform: uppercase;
+  color: $primary-font-color;
+  font-size: 1.563rem;
+}
+
+.fullwidth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 13rem;
+  min-width: 13rem;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.-spacing {
+  &-a {
+    padding: 3rem 0;
+    margin-top: 3.125rem;
+  }
+}
+.profiles {
+  margin-top: 0;
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  overflow: auto;
+}
+
+.-typo {
+  &-copy {
+    margin-bottom: 1.875rem;
+    color: $secondary-font-color;
+    font-size: 1rem;
+    font-family: $primary-font;
+
+    &--blue {
+      color: $primary-font-color;
+    }
+  }
+}
+
+.profile-image {
+  // overflow: hidden;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    .edit-profile-image {
+      opacity: 1;
+    }
+  }
+}
+
+.edit-profile-image {
+  width: 13.1rem;
+  height: 100%;
+  // position: absolute;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem;
+  cursor: pointer;
+  opacity: 0;
+  background: -moz-linear-gradient(
+    top,
+    rgba(231, 211, 116, 0.7) 0%,
+    rgba(8, 184, 184, 0.7) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(231, 211, 116, 0.7) 0%,
+    rgba(8, 184, 184, 0.7) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(231, 211, 116, 0.7) 0%,
+    rgba(8, 184, 184, 0.7) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3e7d374', endColorstr='#b308b8b8',GradientType=0 );
+  transition: all 0.2s ease-in-out;
+
+  &__information {
+    color: #fff;
+    font-size: 1.125rem;
+  }
+
+  &__label {
+    margin-left: 0.5rem;
+    display: inline-block;
+    font-family: $primary-font;
+  }
+}
+.btn__icon{
+  color: black;
+}
+
+.btn {
+  border: none;
+  background: #fff;
+  border-radius: 0;
+  padding: 0.875rem 0.625rem;
+  cursor: pointer;
+
+  &__label {
+    font-family: $primary-font;
+    margin-left: 0.5rem;
+  }
+
+  &--green {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 5px;
+    background-color: $green;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    @include mobile {
+      margin: 5px 0;
+    }
+  }
+}

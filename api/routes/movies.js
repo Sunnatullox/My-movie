@@ -6,7 +6,7 @@ const verifyLogin = require("../middleware/verifyLogin");
 // Created
 router.post("/", verifyLogin, async (req, res) => {
   const { isAdmin } = req.user;
-
+  console.log(req.body)
   if (isAdmin) {
     const newMovie = new Movie(req.body);
 
