@@ -1,14 +1,15 @@
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 import { loginFailure, loginStart, loginSuccess, userUpdateFailure, userUpdateStart, userUpdateSuccess } from "./AuthAction";
 
-export const login = async (user, dispatch) => {
+export const login = async (user, dispatch, setLoginRes) => {
   dispatch(loginStart());
   try {
     const res = await axios.post('http://localhost:5000/api/auth/login', user)
      dispatch(loginSuccess(res.data))
-
   } catch (error) {
     dispatch(loginFailure());
+    return toast.error(error.response.data.msg)
   }
 };
 

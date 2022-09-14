@@ -6,15 +6,17 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logoutStart } from "../../authContext/AuthAction";
 
-function Navbar({user}) {
+function Navbar({ user }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [searching, setSearching] = useState(false);
   const { dispatch } = useContext(AuthContext);
-  const userLocalstorage = localStorage.getItem("user")
+  const userLocalstorage = localStorage.getItem("user");
   const userinfo = JSON.parse(userLocalstorage)?.user;
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+
 
   return (
     <div className={isScrolled ? "navbars scrolled" : "navbars"}>
@@ -40,24 +42,22 @@ function Navbar({user}) {
               <span>My List</span>
             </div>
             <div className="right">
-              <Search className="icon" />
+              <input type="text" className={searching ? "d-block form-control" :"d-none"}  id="search" placeholder="Search..." />
+               <Search className="icon" onClick={() => setSearching(!searching)}/>
               <span>KID</span>
               <Notifications className="icon" />
-                {userinfo?.profilePic ==="" ?(
-                  <Link to="/myProfile">
-                    <img
-                      src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
-                      alt={userinfo?.name}
-                    />
-                  </Link>
-                  ):(
-                  <Link to="/myProfile">
+              {userinfo?.profilePic === "" ? (
+                <Link to="/myProfile">
                   <img
-                    src={userinfo?.profilePic}
+                    src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
                     alt={userinfo?.name}
                   />
-                  </Link>
-                )}
+                </Link>
+              ) : (
+                <Link to="/myProfile">
+                  <img src={userinfo?.profilePic} alt={userinfo?.name} />
+                </Link>
+              )}
               <div className="profile">
                 <ArrowDropDown className="icon" />
                 <div className="options">

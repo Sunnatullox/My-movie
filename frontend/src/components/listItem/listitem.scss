@@ -1,6 +1,6 @@
 .listItem {
   width: 235px;
-  height: 120px;
+  height: 140px;
   background-color: var(--main-color);
   margin-right: 5px;
   overflow: hidden;
@@ -35,6 +35,7 @@
     }
 
     .itemInfo{
+        height: 100%;
         display: flex;
         flex-direction: column;
         padding: 5px;

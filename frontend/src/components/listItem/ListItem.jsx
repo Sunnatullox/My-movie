@@ -52,6 +52,7 @@ const ListItem = ({ index, item }) => {
   {
     isHovered && handlePlayMove();
   }
+  
 
   return (
     <Link to={{pathname:"/watch", movie:movie}}>
@@ -77,7 +78,7 @@ const ListItem = ({ index, item }) => {
               <span className="limit">+{movie.limit}</span>
               <span>{movie.year}</span>
             </div>
-            <div className="desc">{movie.descr}</div>
+            <div className="desc">{movie.descr.slice(0, 100)}. . . . .</div>
             <div className="genre">{movie.genre}</div>
           </div>
         </>

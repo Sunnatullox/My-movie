@@ -37,8 +37,8 @@ function Home({ types }) {
     <div className="home">
       <Navbar user={user}/>
       <Featured type={types} setGenre={setGenre}/>
-      {lists.map((list, i) =>( 
-        <List key={i}  list={list}/>
+      {lists.map((list, i) => ( 
+        <List key={i} list={list}/>
       ))}
     </div>
   );

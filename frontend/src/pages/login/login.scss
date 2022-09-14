@@ -39,7 +39,7 @@
 
       form{
         width: 50%;
-        height: 50%;
+        height: auto;
         padding: 30px;
         border-radius: 5px;
         background-color: var(--main-color);
@@ -63,6 +63,7 @@
             background-color: grey;
             color: white;
             padding-left: 10px;
+            margin: 10px 0;
             @include mobile {
               margin: 5px 0;
             }
@@ -73,6 +74,10 @@
         }
         button{
             height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
             border-radius: 5px;
             background-color: red;
             color: white;

@@ -8,7 +8,7 @@ import {
 import "./list.scss";
 import { useRef } from "react";
 
-const List = ({list}) => {
+const List = ({list, }) => {
   const [isMoved, setIsMoved] = useState(false);
   const [slidenumber, setSlideNumber] = useState(0);
   const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
@@ -40,6 +40,7 @@ const List = ({list}) => {
         <div className="container" ref={listRef}>
           {list.content.map((item, i) => (
             <ListItem index={i} key={i} item={item}/>
+            
           ))}
         </div>
         <ArrowForwardIosOutlined

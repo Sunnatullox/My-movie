@@ -56,6 +56,7 @@
 
     h1 {
       font-size: 50px;
+      color: white;
       text-align: center;
       @include mobile {
         font-size: 16px;
@@ -78,42 +79,46 @@
       }
     }
     .input {
-      width: 100%;
+      width: 50%;
       background-color: white;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 20px;
       height: 50px;
+      border-radius: 5px;
       @include mobile {
         justify-content: center;
         background-color: inherit;
         display: grid;
         width: 100%;
       }
-      .inputdiv{
+      .inputdiv {
         margin: 10px 0 !important;
       }
 
       input {
         text-align: center;
-        width: 100%;
+        // width: 100%;
         flex: 9;
         height: 100%;
         border: none;
-        margin: 0 10px;
+        padding: 0 10px;
         border-radius: 5px;
         @include mobile {
           display: grid;
           padding: 10px 0;
           justify-content: center;
-          place-items: center  !important;
+          place-items: center !important;
           width: 100%;
         }
       }
 
       .registerButton {
         flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 100%;
         background-color: red;
         border: none;
@@ -121,6 +126,7 @@
         font-size: 22px;
         cursor: pointer;
         border-radius: 5px;
+        font-style: inherit;
         @include mobile {
           margin-left: 1.5rem !important;
           margin: 0;
