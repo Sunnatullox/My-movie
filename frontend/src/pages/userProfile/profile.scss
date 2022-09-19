@@ -139,12 +139,15 @@ h5 {
     align-items: center;
     height: 40px;
     border-radius: 5px;
-    background-color: $green;
+    background-color: #ff8d1e;
     color: white;
     border: none;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
+    &:hover{
+      background-color: #08b8b8;
+    }
     @include mobile {
       margin: 5px 0;
     }

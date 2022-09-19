@@ -13,8 +13,9 @@ import { useContext } from "react";
 import { AuthContext } from "./authContext/AuthContext"
 import MovieInfo from "./pages/movieInfo/MovieInfo";
 import Profile from "./pages/userProfile/Profile";
-import Navbar from "./components/navbar/Navbar";
 import 'react-toastify/dist/ReactToastify.css';
+import Pricing from "./components/pricing/Pricing";
+import  NotFound  from "./components/notFound/NotFound";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -39,15 +40,11 @@ function App() {
             <Route path="/series">
               <Home types={"series"} />
             </Route>
-            <Route path="/watch">
-              <Watch />
-            </Route>
-            <Route path="/movieInfo">
-              <MovieInfo />
-            </Route>
-            <Route path="/myProfile">
-              <Profile />
-            </Route>
+            <Route path="/watch/:id" component={Watch} />
+            <Route path="/movieInfo" component={MovieInfo} />
+            <Route path="/myProfile" component={Profile} />
+            <Route path="/pricing" component={Pricing} />
+            {/* <Route path="*" component={NotFound} /> */}
           </>
         )}
       </Switch>

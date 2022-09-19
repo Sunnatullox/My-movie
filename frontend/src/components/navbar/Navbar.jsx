@@ -5,8 +5,10 @@ import AppLogo from "../../image/My_Movie-removebg-preview.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logoutStart } from "../../authContext/AuthAction";
+import { useHistory } from "react-router-dom";
 
-function Navbar({ user }) {
+function Navbar({ user, loginIn }) {
+const history = useHistory()
   const [isScrolled, setIsScrolled] = useState(false);
   const [searching, setSearching] = useState(false);
   const { dispatch } = useContext(AuthContext);
@@ -16,8 +18,7 @@ function Navbar({ user }) {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-
-
+  
   return (
     <div className={isScrolled ? "navbars scrolled" : "navbars"}>
       <div className="containers">
@@ -42,8 +43,16 @@ function Navbar({ user }) {
               <span>My List</span>
             </div>
             <div className="right">
-              <input type="text" className={searching ? "d-block form-control" :"d-none"}  id="search" placeholder="Search..." />
-               <Search className="icon" onClick={() => setSearching(!searching)}/>
+              <input
+                type="text"
+                className={searching ? "d-block form-control" : "d-none"}
+                id="search"
+                placeholder="Search..."
+              />
+              <Search
+                className="icon"
+                onClick={() => setSearching(!searching)}
+              />
               <span>KID</span>
               <Notifications className="icon" />
               {userinfo?.profilePic === "" ? (
@@ -62,15 +71,23 @@ function Navbar({ user }) {
                 <ArrowDropDown className="icon" />
                 <div className="options">
                   <Link to="/myProfile">Profile</Link>
-                  <span onClick={() => dispatch(logoutStart())}>LogOut</span>
+                  <span onClick={() => (dispatch(logoutStart()), history.push("/"))}>LogOut</span>
                 </div>
               </div>
             </div>
           </>
         ) : (
-          <Link to="/login" className="loginbutton">
-            Sign In
-          </Link>
+          <>
+            {loginIn ? (
+              <Link to="/register" className="loginbutton">
+                Sign Up
+              </Link>
+            ) : (
+              <Link to="/login" className="loginbutton">
+                Sign In
+              </Link>
+            )}
+          </>
         )}
       </div>
     </div>

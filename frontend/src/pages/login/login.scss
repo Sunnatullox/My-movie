@@ -79,11 +79,14 @@
             align-items: center;
             margin: 10px 0;
             border-radius: 5px;
-            background-color: red;
+            background-color: #ff8d1e;
             color: white;
             border: none;
             font-size: 18px;
             font-weight: 500;
+            &:hover{
+              background-color: #4b92dc;
+            }
             cursor: pointer;
             @include mobile {
               margin: 5px 0;

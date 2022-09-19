@@ -6,6 +6,7 @@ import { AuthContext } from "../../authContext/AuthContext";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { toast, ToastContainer } from "react-toastify";
+import Footer from "../../components/footer/Footer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ const Login = () => {
 
   return (
     <>
-      <Navbar user={user} />
+      <Navbar user={user} loginIn={"Sign In"} />
       <div className="login">
         <ToastContainer />
         <div className="container">
@@ -59,6 +60,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -10,9 +10,9 @@ const [content, setContent] = useState({})
 useEffect(() => {
   const getRandomContent =  async()=>{
     try {
-      const res = await axios.get(`http://localhost:5000/api/movies/randam?type=${type}`,{
+      const res = await axios.get(`https://evening-hamlet-96260.herokuapp.com/api/movies/randam?type=${type}`,{
         headers: {
-          Authorization:"Sunna "+ "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE3ZWZjOTRiNjg5NTQ4ZDVkMDMyNWEiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NjI2MDkxNzl9.Bd1APD-phRJb9oyinEiDQprqQctKjBFon_v45plbR-M",
+          Authorization:"Sunna " + JSON.parse(localStorage.getItem("user")).token,
         },
       });
       setContent(res.data[0])
@@ -21,7 +21,7 @@ useEffect(() => {
     }
   }
   getRandomContent()
-}, []);;
+}, [type]);
 
   return (
     <div className="featured">
@@ -60,7 +60,7 @@ useEffect(() => {
         )}
         <span className="desc">{content.descr?.slice(0, 200)}. . .</span>
         <div className="buttons">
-            <Link   className="play" to={{pathname:"/watch", movie:content}}>
+            <Link className="play" to={`/watch/${content._id}`}>
             <PlayArrow />
               <span>
                 Play

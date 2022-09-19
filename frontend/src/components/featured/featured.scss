@@ -1,6 +1,6 @@
 @import "../../App.scss";
 .featured {
-  height: 30rem !important;
+  height: 80vh !important;
   position: relative;
   @include mobile {
     height: 90vh !important;
@@ -78,8 +78,12 @@
         text-decoration: none;
 
         &.play {
-          background-color: white;
-          color: var(--main-color);
+          background-color: #ff8d1e;
+          color: #fff;
+
+          &:hover{
+            background-color: #4b92dc;
+          }
         }
 
         &.more {

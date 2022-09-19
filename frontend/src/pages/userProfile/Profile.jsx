@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import Navbar from '../../components/navbar/Navbar'
+import Footer from "../../components/footer/Footer";
 
 const Profile = () => {
   const { user, dispatch } = useContext(AuthContext);
@@ -60,11 +61,11 @@ const Profile = () => {
 
   const handleUpdateprofile = async (e) => {
     e.preventDefault();
-    upload([{ file: userPic, label: "profilePic" }]);
+    upload([{ file: userPic, label: "profilePic"}]);
   };
 
   if (userinfoUpload === 1) {
-    if(name !== "" && email !== "" && password!== ""){
+    if(name !== "" && email !== "" && password !== ""){
       updateProfile(userinfo._id, updateProfileData, user, dispatch);
       setUserinfoUpload((prev) => prev - 1);
       toast.success("Profile Sucsess fully updated")
@@ -98,7 +99,6 @@ const Profile = () => {
               )}
               <label htmlFor="userPicUpdate" className="edit-profile-image">
                 <span className="edit-profile-image__information">
-                  <span className="fa fa-camera"></span>
                   <span className="edit-profile-image__label">
                     <CameraAlt className="btn__icon"  style={{fontSize:"25px",}}/>
                   </span>
@@ -169,6 +169,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    <Footer />
   </>
   );
 };

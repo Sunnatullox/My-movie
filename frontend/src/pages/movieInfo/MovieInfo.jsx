@@ -4,6 +4,7 @@ import "./movieInfo.scss";
 import { useContext } from "react";
 import { AuthContext } from "../../authContext/AuthContext";
 import Navbar from '../../components/navbar/Navbar'
+import Footer from "../../components/footer/Footer";
 
 const MovieInfo = () => {
   const { user } = useContext(AuthContext);
@@ -33,6 +34,7 @@ const MovieInfo = () => {
             <img src={movieInfo.imgSm} alt=""className="blur_back tomb_back" />
       </div>
     </div>
+    <Footer />
     </>
   );
 };

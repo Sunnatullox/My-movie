@@ -91,7 +91,7 @@
       }
     }
     .loginbutton {
-      background-color: red;
+      background-color: #ff8d1e;
       border: none;
       color: white;
       border-radius: 5px;
@@ -100,6 +100,9 @@
       font-weight: 500;
       cursor: pointer;
       text-decoration: none;
+      &:hover{
+        background-color: #4b92dc;
+      }
       @include mobile {
         padding: 1px 8px;
         font-size: 12px;

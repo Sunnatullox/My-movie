@@ -8,7 +8,7 @@ import {
 import "./list.scss";
 import { useRef } from "react";
 
-const List = ({list, }) => {
+const List = ({ list }) => {
   const [isMoved, setIsMoved] = useState(false);
   const [slidenumber, setSlideNumber] = useState(0);
   const [clickLimit, setClickLimit] = useState(window.innerWidth / 230);
@@ -16,7 +16,7 @@ const List = ({list, }) => {
   const listRef = useRef();
 
   const handelClick = (direction) => {
-    setIsMoved(true)
+    setIsMoved(true);
     let distance = listRef.current.getBoundingClientRect().x - 50;
     if (direction === "left" && slidenumber > 0) {
       setSlideNumber(slidenumber - 1);
@@ -35,12 +35,11 @@ const List = ({list, }) => {
         <ArrowBackIosOutlined
           onClick={() => handelClick("left")}
           className="sliderArrow"
-          style={{display : !isMoved && "none"}}
+          style={{ display: !isMoved && "none" }}
         />
         <div className="container" ref={listRef}>
           {list.content.map((item, i) => (
-            <ListItem index={i} key={i} item={item}/>
-            
+            <ListItem index={i} key={i} item={item} />
           ))}
         </div>
         <ArrowForwardIosOutlined
