@@ -35,15 +35,14 @@ function Home({ types }) {
     }
   };
   useEffect(() => {
-      getRandom();
+    getRandom();
   }, [types, genre]);
-
 
   setTimeout(() => {
     if (lists) {
-     return setisLoading(false);
+      return setisLoading(false);
     } else if (!lists) {
-       return setisLoading(true);
+      return setisLoading(true);
     }
   }, 5000);
 
@@ -53,7 +52,7 @@ function Home({ types }) {
         <Spiner />
       ) : (
         <>
-            <Navbar user={user} />
+          <Navbar user={user} />
           <div className="home">
             <Featured type={types} setGenre={setGenre} />
             {lists.map((list, i) => (
